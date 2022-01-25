@@ -10,15 +10,17 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     start = getMaxId()
+    print('start = ' + str(start))
     randomRange = random.randint(0, 100000)
     print('randomRange = ' + str(randomRange))
     end = start + randomRange
+    print('end = ' + str(end))
 
-    max_id = random.randint(0, end)
-    max_id_str = changeBase(max_id, 62)
-
-    setMaxId(max_id)
-    return json.dumps({"data": {"prettyId": max_id_str}})
+    prettyId = random.randint(start, end)
+    prettyId_str = changeBase(prettyId, 62)
+    print('prettyId = ' + prettyId_str)
+    setMaxId(prettyId)
+    return json.dumps({"data": {"prettyId": prettyId_str}})
 
 
 def changeBase(n, b):
@@ -44,7 +46,6 @@ def getMaxId():
     cursor = db.cursor()
     cursor.execute('SELECT max_id FROM t_max_id')
     max_id = cursor.fetchone()[0]
-    print('max_id = ' + str(max_id))
     db.close()
     return max_id
 
