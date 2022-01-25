@@ -11,7 +11,7 @@ app = Flask(__name__)
 def hello_world():
     start = getMaxId()
     print('start = ' + str(start))
-    randomRange = random.randint(0, 100000)
+    randomRange = random.randint(0, 20000)
     print('randomRange = ' + str(randomRange))
     end = start + randomRange
     print('end = ' + str(end))
